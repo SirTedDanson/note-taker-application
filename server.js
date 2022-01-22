@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
-const notes  = require('./db/db.json');
+const notes = require('./db/db.json');
+const { v4: uuidv4 } = require('uuid');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -10,39 +11,41 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// function findById(id, notes) {
-//   const result = notes.filter(note => note.id === id)[0];
-//   return result;
-// };
-
-function createNewNote(body, notes) {
-  const note = body;
-  notes.push(note);
+const writeToFile = notes => {
   fs.writeFileSync(
     path.join(__dirname, './db/db.json'),
     JSON.stringify(notes, null, 2)
   );
+}
 
-  return note;
+const updateNotes = (newNote, notes) => {
+  const note = newNote;
+  notes.push(note);
+  writeToFile(notes)
+  return notes;
+};
+
+const deleteNote = (id, notes) => {
+  const noteIndex = notes.findIndex(note => note.id == id);
+  notes.splice(noteIndex, 1);
+  writeToFile(notes)
+  return notes;
 };
 
 app.get('/api/notes', (req, res) => {
   res.json(notes);
 });
 
-// app.get('/api/notes/:id', (req, res) => {
-//   const result = findById(req.params.id, notes);
-//   if (result) {
-//     res.json(result);
-//   } else {
-//     res.send(404);
-//   }
-// });
+app.delete('/api/notes', (req, res) => {
+  const newNotes = deleteNote(req.query.id, notes);
+
+  res.json(newNotes);
+});
 
 app.post('/api/notes', (req, res) => {
-  req.body.id = notes.length.toString();
+  req.body.id = uuidv4();
 
-  const note = createNewNote(req.body, notes);
+  const note = updateNotes(req.body, notes);
 
   res.json(note);
 });
