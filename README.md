@@ -61,7 +61,7 @@
   * JSS
   * Node.js
   * Express.js
-  <br/>
+  * Jest
   <br/>
 
   ## Screenshot
@@ -243,6 +243,11 @@
 
   </details>
   
+  ## Tests
+
+  - Tested with Jest.
+
+  ![Test GIF](./lib/images/test-demo.gif)
 
 
   <p align="right">(<a href="#top">back to top</a>)</p>
