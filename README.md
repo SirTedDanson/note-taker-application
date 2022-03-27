@@ -16,7 +16,7 @@
     <a href="https://github.com/SirTedDanson/note-taker-express"><strong>Project Documents »</strong></a>
     <br />
     <br />
-    <a href="https://salty-falls-98079.herokuapp.com/">Deployed Application</a>
+    <a href="https://thawing-spire-11710.herokuapp.com/">Deployed Application</a>
     ·
     <a href="https://github.com/SirTedDanson/note-taker-express/issues">Report Bug</a>
     ·
@@ -51,7 +51,7 @@
   ## Deployed Application
   <br/>
   
-  [Note Taker Express](https://salty-falls-98079.herokuapp.com/)
+  [Note Taker Express](https://thawing-spire-11710.herokuapp.com/)
   <br/>
   <br/>
 
